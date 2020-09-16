@@ -17,4 +17,4 @@ def index():
 @content.route("/profile")
 @login_required
 def profile():
-	return render_template("profile.html", user = current_user)
+	return render_template("dashboard.html", user = current_user)
