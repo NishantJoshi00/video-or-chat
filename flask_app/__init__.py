@@ -4,15 +4,17 @@ from flask import Flask, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from .generator import keygen
+from flask_socketio import SocketIO
 db = SQLAlchemy()
-
+socketio = SocketIO();
 
 def create_app() -> Flask:
 	app = Flask(__name__);
-	app.config['SECRET_KEY'] = keygen()
+	app.config['SECRET_KEY'] = keygen();
 	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
 	db.init_app(app)
+	socketio.init_app(app)
 
 	login_manager = LoginManager()
 	login_manager.login_view = 'security.login'
